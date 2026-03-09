@@ -1,4 +1,5 @@
-from rpc_con import rpc , rpc_user , rpc_password , rpc_port 
+from decimal import Decimal
+from rpc_con import rpc , rpc_user , rpc_password  
 from bitcoinrpc.authproxy import AuthServiceProxy
 
 class BitcoinRegtest:
@@ -6,6 +7,8 @@ class BitcoinRegtest:
     def __init__(self):
         self.rpc = rpc
         self.wallet_rpc = None
+        self.utxos = None
+        self.script_pub_key = None
 
 
     def create_wallet(self, wallet_name):
@@ -16,9 +19,10 @@ class BitcoinRegtest:
         except Exception as e:
             print("Wallet may already exist:", e)
 
+
         # connect to wallet RPC endpoint
         self.wallet_rpc = AuthServiceProxy(
-            f"http://{rpc_user}:{rpc_password}@127.0.0.1:{rpc_port}/wallet/{wallet_name}"
+            f"http://{rpc_user}:{rpc_password}@127.0.0.1:18443/wallet/{wallet_name}"
         )
 
 
@@ -51,6 +55,9 @@ class BitcoinRegtest:
         txid = self.wallet_rpc.sendtoaddress(address, amount)
         print("Transaction sent:", txid)
 
+        # confirm transaction
+        self.rpc.generatetoaddress(1, self.wallet_rpc.getnewaddress())
+
         return txid
 
 
@@ -61,26 +68,32 @@ class BitcoinRegtest:
 
         return balance
 
-
     # list utxos of address
     def list_utxos(self, address):
-        utxos = self.wallet_rpc.listunspent(1, 9999999, [address])
+        self.utxos = self.wallet_rpc.listunspent(1, 9999999, [address])
         print("UTXOs:")
 
-        for u in utxos:
+        for u in self.utxos:
             print(u)
 
-        return utxos
+        return self.utxos
     
-    utxos = list_utxos("A")
-    utxo = utxos[0]
-    txid = utxo["txid"]
-    vout = utxo["vout"]
-    amount = utxo["amount"]
+    #get address balance
+    def get_address_balance(self, address):
+        self.utxos = self.list_utxos(address)
+        balance = sum([u["amount"] for u in self.utxos])
+        print(f"Balance of {address}: {balance}")
 
+        return balance
     
-    def create_raw_transaction(self, txid, vout, sender_addr, receiver_addr, utxo_amount, send_amount, fee):
 
+    def create_raw_transaction(self,sender_addr, receiver_addr, send_amount, fee):
+        fee = Decimal(str(fee))
+        self.utxos = self.list_utxos(sender_addr)
+        utxo = self.utxos[0]
+        txid = utxo["txid"]
+        vout = utxo["vout"]
+        utxo_amount = utxo["amount"]
         # input UTXO
         inputs = [{
             "txid": txid,
@@ -88,7 +101,10 @@ class BitcoinRegtest:
         }]
 
         # calculate change
-        change = utxo_amount - send_amount - fee
+        if(utxo_amount < send_amount + fee):
+            raise Exception("Insufficient funds")
+        else:
+            change = utxo_amount - send_amount - fee
 
         outputs = {
             receiver_addr: send_amount,
@@ -113,7 +129,7 @@ class BitcoinRegtest:
             print("Value:", vout["value"])
             print("ScriptPubKey:", vout["scriptPubKey"])
 
-        return decoded
+        return decoded 
 
 
     # sign transaction
