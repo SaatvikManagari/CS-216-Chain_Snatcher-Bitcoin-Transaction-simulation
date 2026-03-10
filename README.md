@@ -209,25 +209,25 @@ The transaction size was obtained using:
 
 The important fields observed were size, vsize and weight.
 
-  Metric	            P2PKH (Legacy)	          P2SH-P2WPKH (SegWit)
-  
-  Size(bytes)	             225	                         247
-  Virtual Size (vbytes)	   225	                         166
-  Weight	                 900	                         661
-  Fee	                     Higher	                      Lower
+ | Metric | P2PKH (Legacy) | P2SH-P2WPKH (SegWit) |
+|--------|---------------|----------------------|
+| Size (bytes) | 226 | 222 |
+| Virtual Size (vbytes) | 226 | 141 |
+| Weight | 904 | 564 |
+| Fee | Higher | Lower |
 
 The SegWit transaction has smaller virtual size and weight compared to the Legacy transaction.
 
 #### 2. Script structure comparison (challenge-response script)
    
-Feature	                      P2PKH (Legacy)	                                      P2SH-P2WPKH (SegWit)
-
-ScriptPubKey	      OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY        OP_CHECKSIG	OP_HASH160 <ScriptHash> OP_EQUAL
-scriptSig	                   Signature PubKey	                                        0 <PubKeyHash>
-RedeemScript	                   Not used	                                            0 <PubKeyHash>
-Witness	                        Not present	                                          Signature PubKey
-Validation	              scriptSig + scriptPubKey	                  scriptSig + scriptPubKey + redeemScript + witness
-Script result	                     TRUE	                                                     TRUE
+| Feature | P2PKH (Legacy) | P2SH-P2WPKH (SegWit) |
+|---------|---------------|----------------------|
+| ScriptPubKey | OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG | OP_HASH160 <ScriptHash> OP_EQUAL |
+| scriptSig | Signature PubKey | 0 <PubKeyHash> |
+| RedeemScript | Not used | 0 <PubKeyHash> |
+| Witness | Not present | Signature PubKey |
+| Validation | scriptSig + scriptPubKey | scriptSig + scriptPubKey + redeemScript + witness |
+| Script result | TRUE | TRUE |
 
 * In P2PKH, the signature and public key are stored in scriptSig.
 * In P2SH-P2WPKH, the signature and public key are stored in the witness, and scriptSig only contains the redeemScript.
