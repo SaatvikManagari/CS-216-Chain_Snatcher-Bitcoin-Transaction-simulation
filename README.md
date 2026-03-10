@@ -107,6 +107,22 @@ The entire execution takes place using a stack-based execution process :
 
 ### Images:
 
+#### Outputs:
+
+![Legacy 1](https://github.com/user-attachments/assets/f7756776-3bfe-439f-a9bb-c0e0fcc11136)
+
+![legacy 2](https://github.com/user-attachments/assets/39a3bd91-b97b-4931-9e26-e748ca466147)
+
+
+
+#### Verification:
+![Legacy 1](https://github.com/user-attachments/assets/4acd00bb-417d-47ec-a149-250a4c9f2347)
+
+
+![Legacy 2](https://github.com/user-attachments/assets/8322fcae-7efd-45af-8d68-41a0b6154201)
+
+
+![Legacy 3](https://github.com/user-attachments/assets/9191290e-36f0-42cd-9fce-189d58f1ba36)
 
 
 ## Part 2: SegWit Transaction
@@ -201,6 +217,29 @@ The Entire Execution takes place using a stack-based execution process :
 * Push PubKeyHash -> [Sig, PubKey, HASH160(PubKey), PubKeyHash]
 * OP_EQUALVERIFY -> [Sig, PubKey]
 * OP_CHECKSIG -> [TRUE]
+
+
+### Images:
+
+#### Outputs:
+
+![Segwit 1](https://github.com/user-attachments/assets/8c4eb0d3-5612-4332-8627-bf4481d9c4d8)
+
+
+![Segwit 2](https://github.com/user-attachments/assets/a4f6da29-0cb4-4081-bba9-9bab47ed66c4)
+
+
+![Segwit 3](https://github.com/user-attachments/assets/735d7a67-2861-45ea-801a-da97fbcb7dd0)
+
+
+#### Verification:
+
+![Segwit 1](https://github.com/user-attachments/assets/dfa58e48-c2fe-4d55-bb91-a92453a273c1)
+
+
+![segwit 2](https://github.com/user-attachments/assets/700cfc68-9c24-49bc-8049-f1104a199c08)
+
+
 
   ## Part 3: Analysis and Explanation
 
