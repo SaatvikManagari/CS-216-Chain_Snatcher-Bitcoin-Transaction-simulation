@@ -1,4 +1,4 @@
-# CS-216-Chain_Snatcher-Bitcoin-Transaction-simulation
+# CS-216-Chain_Snatchers-Bitcoin-Transaction-simulation
 
 ## Team Information
 
