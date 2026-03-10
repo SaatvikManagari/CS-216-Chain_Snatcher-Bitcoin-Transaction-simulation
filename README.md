@@ -75,30 +75,16 @@ Once this is done, we can start with the making of the required transaction
 #### Script Execution using BTCDEB
 
 
-The Entire Execution takes place using a stack-based execution process
+The Entire Execution takes place using a stack-based execution process : 
 
-*Initial stack -> []
-
-
-*Push Signature -> [Sig]
-
-
-*Push PubKey -> [Sig, PubKey]
-
-
-*OP_DUP -> [Sig, PubKey, PubKey]
-
-
-*OP_HASH160 -> [Sig, PubKey, HASH160(PubKey)]
-
-
-*Push PubKeyHash -> [Sig, PubKey, HASH160(PubKey), PubKeyHash]
-
-
-*OP_EQUALVERIFY -> [Sig, PubKey]
-
-
-*OP_CHECKSIG -> [TRUE]
+* Initial stack -> []
+* Push Signature -> [Sig]
+* Push PubKey -> [Sig, PubKey]
+* OP_DUP -> [Sig, PubKey, PubKey]
+* OP_HASH160 -> [Sig, PubKey, HASH160(PubKey)]
+* Push PubKeyHash -> [Sig, PubKey, HASH160(PubKey), PubKeyHash]
+* OP_EQUALVERIFY -> [Sig, PubKey]
+* OP_CHECKSIG -> [TRUE]
 
 
 
