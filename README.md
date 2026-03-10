@@ -14,10 +14,12 @@
 
 ## Step up
 
-We first setup the bitcoin core using the setup wizard and edit the configure file to match the requirements of the project.
+We first setup the bitcoin core using the setup wizard and edit the configure file to match the requirements of the project. 
 
 '''json 
 
+sss 
+'''
 
 ## Part 1: Legacy Transaction
 
