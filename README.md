@@ -1,5 +1,11 @@
 # CS-216-Chain_Snatchers-Bitcoin-Transaction-simulation
 
+## Introduction
+
+This project demonstrates the creation, signing, broadcasting, and verification of Bitcoin transactions using Bitcoin Core in regtest mode. The objective of this simulation is to understand how Bitcoin transactions work internally by manually constructing and analyzing both Legacy (P2PKH) and SegWit (P2SH-P2WPKH) transactions.
+Using RPC commands, Python scripts, and the btcdeb Bitcoin Script debugger, we simulate the complete transaction workflow including wallet funding, raw transaction creation, script validation, and UTXO spending. The project also compares Legacy and SegWit transactions in terms of script structure, transaction size, weight, and fees, providing a clear understanding of how SegWit improves efficiency and solves issues such as transaction malleability.
+This simulation helps in gaining practical knowledge of Bitcoin’s scripting system, transaction format, and validation mechanism at a low level.
+
 ## Team Information
 
 ### Team Name: Chain Snatchers
