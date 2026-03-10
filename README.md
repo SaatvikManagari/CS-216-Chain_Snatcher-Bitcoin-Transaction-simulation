@@ -7,10 +7,18 @@
 * **Team Member 4:** Malladi Charan - 240008016
 
 ## Pre-Requisites:
-* Bitcoin Core (bitcoind version > 27.0) 
+* Bitcoin Core (bitcoind version > 27.0 & bitcoin-cli) 
 * Python (version>3.8)
 * Libraries: Bitcoinrpc
 * Bitcoin Debugger: btcdeb
 
+## Step up
 
-## 
+We first setup the bitcoin core using the setup wizard and edit the configure file to match the requirements of the project.
+
+'''json 
+
+
+## Part 1: Legacy Transaction
+
+### Workflow: 
