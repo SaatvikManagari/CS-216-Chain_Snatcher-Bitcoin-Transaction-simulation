@@ -211,9 +211,9 @@ The important fields observed were size, vsize and weight.
 
  | Metric | P2PKH (Legacy) | P2SH-P2WPKH (SegWit) |
 |--------|---------------|----------------------|
-| Size (bytes) | 226 | 222 |
-| Virtual Size (vbytes) | 226 | 141 |
-| Weight | 904 | 564 |
+| Size (bytes) | 225 | 247 |
+| Virtual Size (vbytes) | 225 | 166 |
+| Weight | 900 | 661 |
 | Fee | Higher | Lower |
 
 The SegWit transaction has smaller virtual size and weight compared to the Legacy transaction.
