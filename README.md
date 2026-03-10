@@ -63,17 +63,13 @@ Once this is done, we can start with the making of the required transaction
 ### Script Analysis
 
 * Using the btcdeb, we verify the transaction's validity
-* We using ```./btcdeb <ScriptSig> <ScriptPubKey>```
-
+* We are using ```./btcdeb <ScriptSig> <ScriptPubKey>```
 
 **ScriptSig:** ```Signature[ALL] Pubkey```
 
-
 **ScriptPubKey:** ```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
 
-
 #### Script Execution using btcdeb
-
 
 The Entire Execution takes place using a stack-based execution process : 
 
@@ -89,9 +85,9 @@ The Entire Execution takes place using a stack-based execution process :
 
 ## Part 2: SegWit Transaction
 
-### Workflow: 
+### Workflow:
 
-* Generate 3 Different Legacy Address naming them A, B and C
+* Generate 3 Different SegWit Address naming them A, B and C
 * Fund the address A through the wallet
 * Create a transaction using a UTXO addressed to A, send some amount of BTC to Address B from A
 * Decode the transaction and retrieve ScriptPubKey
@@ -99,33 +95,40 @@ The Entire Execution takes place using a stack-based execution process :
 * The transaction is confirmed when a block is mined
 * Repeat the same workflow to generate a transaction from B to C, from the previously generated UTXO at Address B
 * Using the tx_id of the transaction, retrieve the hex of the transaction (transaction condensed into hexadecimal format)
-* Decode this hex using ```deciderawtransaction``` which turns the hex into a readable JSON Script, from which we extract the ScriptSig
+* Decode this hex using decoderawtransaction which turns the hex into a readable JSON Script, from which we extract the ScriptSig, ScriptPubKey and Witness data
 
 ### Script Analysis
 
 * Using the btcdeb, we verify the transaction's validity
-* We using ```./btcdeb <ScriptSig> <ScriptPubKey>```
+* We are using ```./btcdeb <Witness> <RedeemScript / ScriptPubKey>``` 
 
+**Witness:**  ```Signature[ALL] Pubkey```
 
-**ScriptSig:** ```Signature[ALL] Pubkey```
+**ScriptSig:**  ```0 <20-byte-pubkey-hash>```
 
+**ScriptPubKey:**  ```OP_HASH160 <20-byte-script-hash> OP_EQUAL```
 
-**ScriptPubKey:** ```OP_HASH160 <20-byte-script-hash> OP_EQUAL```
-
+**RedeemScript:**  ```0 <20-byte-pubkey-hash>```
 
 #### Script Execution using btcdeb
 
-
-The Entire Execution takes place using a stack-based execution process : 
+The Entire Execution takes place using a stack-based execution process :
 
 * Initial stack -> []
 * Push Signature -> [Sig]
 * Push PubKey -> [Sig, PubKey]
+* Push 0 (from RedeemScript) -> [Sig, PubKey, 0]
+* Push PubKeyHash -> [Sig, PubKey, 0, PubKeyHash]
+* OP_HASH160 -> [Sig, PubKey, HASH160(RedeemScript)]
+* Push ScriptHash -> [Sig, PubKey, HASH160(RedeemScript), ScriptHash]
+* OP_EQUAL -> [Sig, PubKey]
 * OP_DUP -> [Sig, PubKey, PubKey]
 * OP_HASH160 -> [Sig, PubKey, HASH160(PubKey)]
 * Push PubKeyHash -> [Sig, PubKey, HASH160(PubKey), PubKeyHash]
 * OP_EQUALVERIFY -> [Sig, PubKey]
 * OP_CHECKSIG -> [TRUE]
+
+
 
 
 
