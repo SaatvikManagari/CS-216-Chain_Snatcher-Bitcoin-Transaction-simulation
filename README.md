@@ -46,6 +46,8 @@ Once this is done, we can start with the making of the required transaction
 * Create a wallet and connect via the RPC
 * Fund the Wallet by mining 101 Blocks (Standard), generating 50 BTC
 
+Download all the Python files locally and keep the bitcoin.conf file in the Bitcoin running directory. Run the Legacy_work.py for legacy transactions and segwit_work.py for segwit transactions
+
 ## Part 1: Legacy Transaction
 
 ### Workflow: 
