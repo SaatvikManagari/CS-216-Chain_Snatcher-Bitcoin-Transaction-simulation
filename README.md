@@ -222,9 +222,9 @@ The SegWit transaction has smaller virtual size and weight compared to the Legac
    
 | Feature | P2PKH (Legacy) | P2SH-P2WPKH (SegWit) |
 |---------|---------------|----------------------|
-| ScriptPubKey | OP_DUP OP_HASH160 PubKeyHash OP_EQUALVERIFY OP_CHECKSIG | OP_HASH160 <ScriptHash> OP_EQUAL |
-| scriptSig | Signature PubKey | 0 PubKeyHash |
-| RedeemScript | Not used | 0 PubKeyHash |
+| ScriptPubKey | OP_DUP OP_HASH160 <<PubKeyHash>> OP_EQUALVERIFY OP_CHECKSIG | OP_HASH160 <<ScriptHash>> OP_EQUAL |
+| scriptSig | Signature PubKey | 0 <<PubKeyHash>> |
+| RedeemScript | Not used | 0 <<PubKeyHash>> |
 | Witness | Not present | Signature PubKey |
 | Validation | scriptSig + scriptPubKey | scriptSig + scriptPubKey + redeemScript + witness |
 | Script result | TRUE | TRUE |
