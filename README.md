@@ -67,29 +67,29 @@ Once this is done, we can start with the making of the required transaction
 
 1. Locking Script Creation (ScriptPubKey)
    
-When A sends BTC to B, the output contains a ScriptPubKey.
+       When A sends BTC to B, the output contains a ScriptPubKey.
 
-Structure:
+       Structure:
 
-```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
-```<PubKeyHash>```-> is the hash of B’s public key.
+         ```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
+         ```<PubKeyHash>```-> is the hash of B’s public key.
 
-This acts as the challenge script defining the conditions to spend the output.
+       This acts as the challenge script defining the conditions to spend the output.
 
 2. Unlocking Script Creation (ScriptSig)
    
-When B spends the output (B → C), the input contains a ScriptSig.
+       When B spends the output (B → C), the input contains a ScriptSig.
 
-Structure:
+       Structure:
 
-```<signature> <public_key>```
-The signature proves ownership of the private key corresponding to the public key.
+         ```<signature> <public_key>```
+       The signature proves ownership of the private key corresponding to the public key.
 
 3. Transaction Linking
    
-The B → C transaction input references the previous transaction using:
-```txid```-> ID of the A → B transaction
-```vout```-> index of the output being spent
+       The B → C transaction input references the previous transaction using:
+       ```txid```-> ID of the A → B transaction
+       ```vout```-> index of the output being spent
 
 #### Script Execution using btcdeb
 
@@ -126,59 +126,59 @@ The entire execution takes place using a stack-based execution process :
 
 1. Locking Script Creation (ScriptPubKey)
 
-When A sends BTC to B using a SegWit address, the output contains a P2SH ScriptPubKey.
+       When A sends BTC to B using a SegWit address, the output contains a P2SH ScriptPubKey.
 
-Structure:
+       Structure:
 
-```OP_HASH160 <RedeemScriptHash> OP_EQUAL```
-```<RedeemScriptHash>```-> is the HASH160 of the redeem script.
+          ```OP_HASH160 <RedeemScriptHash> OP_EQUAL```
+          ```<RedeemScriptHash>```-> is the HASH160 of the redeem script.
 
-The redeem script corresponds to the SegWit witness program.
+       The redeem script corresponds to the SegWit witness program.
 
 2. Redeem Script(Witness Program)
 
-The redeem script embedded inside P2SH is:
+       The redeem script embedded inside P2SH is:
 
-```0 <PubKeyHash>```
+          ```0 <PubKeyHash>```
 
-0-> SegWit version number.
+          0-> SegWit version number.
 
-```<PubKeyHash>```-> HASH160 of B's public key.
+         ```<PubKeyHash>```-> HASH160 of B's public key.
 
-This script tells Bitcoin that the actual unlocking data will be stored in the witness field.
+       This script tells Bitcoin that the actual unlocking data will be stored in the witness field.
 
 3. Unlocking Script (ScriptSig)
 
-For P2SH-P2WPKH, the ScriptSig contains only the redeem script:
+       For P2SH-P2WPKH, the ScriptSig contains only the redeem script:
 
-```<redeem_script>```
+           ```<redeem_script>```
 
-Example:
+       Example:
 
-```0 <PubKeyHash>```
+          ```0 <PubKeyHash>```
 
-So ScriptSig is much smaller than legacy ScriptSig.
+       So ScriptSig is much smaller than legacy ScriptSig.
 
 4. Witness Data(txinwitness)
 
-The actual unlocking data is placed in the witness field instead of ScriptSig.
+       The actual unlocking data is placed in the witness field instead of ScriptSig.
 
-Witness structure:
+       Witness structure:
 
-```<signature>```
-```<public_key>```
+         ```<signature>```
+         ```<public_key>```
 
-This is similar to the legacy ScriptSig, but moved into the witness.
+       This is similar to the legacy ScriptSig, but moved into the witness.
 
 5. Transaction Linking
 
-The B->C transaction input references the previous output using:
+       The B->C transaction input references the previous output using:
 
-```txid``` → transaction ID of A → B
+          ```txid``` → transaction ID of A → B
 
-```vout``` → output index
+          ```vout``` → output index
 
-This output becomes the input for the next transaction.
+       This output becomes the input for the next transaction.
 
 #### Script Execution using btcdeb
 
