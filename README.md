@@ -66,7 +66,7 @@ Once this is done, we can start with the making of the required transaction
 * We using ```./btcdeb <ScriptSig> <ScriptPubKey>```
 
 
-** ScriptSig : **```Signature[ALL] Pubkey```
-** ScriptPubKey : **```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
+* **ScriptSig:** ```Signature[ALL] Pubkey```
+* **ScriptPubKey:** ```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
 
 
