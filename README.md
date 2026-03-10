@@ -33,8 +33,8 @@ server=1
 txindex=1
 
 [regtest]
-rpcuser=bitcoinrpc
-rpcpassword=chainsnatcher1
+rpcuser=charan
+rpcpassword=123charan
 rpcallowip=127.0.0.1
 rpcport=18443
 
