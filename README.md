@@ -57,6 +57,8 @@ Once this is done, we can start with the making of the required transaction
 
 Download all the Python files locally and keep the bitcoin.conf file in the Bitcoin running directory. Run the Legacy_work.py for legacy transactions and segwit_work.py for segwit transactions
 
+**Note:** The wallet is unloaded after every execution of the file to avoid conflict between the wallets of both files. But if the same file were to be run more than once, the entire regtest is required to be manually reset by deleting the wallets and regtest folders. 
+
 ## Part 1: Legacy Transaction
 
 ### Workflow: 
