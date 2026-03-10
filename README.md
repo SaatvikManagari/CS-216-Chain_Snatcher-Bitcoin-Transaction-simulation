@@ -1,12 +1,15 @@
 # CS-216-Chain_Snatcher-Bitcoin-Transaction-simulation
 
 ## Team Information
+
+###Team Name: Chain Snatchers
+
 * **Team Member 1:** Managari Saatvik - 240002035
 * **Team Member 2:** Nagalla AbhiSri Karthik - 240002041
 * **Team Member 3:** Nemani Sandeep - 240002044
 * **Team Member 4:** Malladi Charan - 240008016
 
-## Pre-Requisites:
+## Requirements:
 * Bitcoin Core (bitcoind version > 27.0 & bitcoin-cli) 
 * Python (version>3.8)
 * Libraries: Bitcoinrpc
