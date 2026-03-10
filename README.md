@@ -16,10 +16,13 @@
 
 We first setup the bitcoin core using the setup wizard and edit the configure file to match the requirements of the project. 
 
-'''json 
+```json
+#Add the config file requirements
+```
 
-sss 
-'''
+Once this is done we can start with making of the required transaction
+
+###
 
 ## Part 1: Legacy Transaction
 
