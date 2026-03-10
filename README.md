@@ -12,18 +12,51 @@
 * Libraries: Bitcoinrpc
 * Bitcoin Debugger: btcdeb
 
-## Step up
+## Initialization
 
-We first setup the bitcoin core using the setup wizard and edit the configure file to match the requirements of the project. 
+### Configuration
+
+We first set up Bitcoin Core using the setup wizard and edited the configuration file to meet the project's requirements. 
 
 ```json
-#Add the config file requirements
+regtest=1
+server=1
+txindex=1
+
+[regtest]
+rpcuser=bitcoinrpc
+rpcpassword=chainsnatcher1
+rpcallowip=127.0.0.1
+rpcport=18443
+
+debug=validation
+
+paytxfee=0.0001
+fallbackfee=0.0002
+mintxfee=0.00001
+txconfirmtarget=6
 ```
 
-Once this is done we can start with making of the required transaction
+Once this is done, we can start with the making of the required transaction
 
-###
+### Setup
+
+* Run the bitcoind in regtest mode using ```bitcoind -regtest```
+* Establish RPC connection with Python file
+* Create a wallet and connect via the RPC
+* Fund the Wallet by mining 101 Blocks (Standard) genrating 50 BTC
 
 ## Part 1: Legacy Transaction
 
 ### Workflow: 
+
+* Generate 3 Different Legacy Address naming them A, B and C
+* Fund the address A through the wallet
+* Create a transaction using a UTXO addressed to A, send some amount of BTC to Address B from A
+* Decode the transaction and retrieve ScriptPubKey
+* Sign the transaction with the sender's Public Key and broadcast it to the network
+* The transaction is confirmed when a block is mined
+* Repeat the same workflow to generate a transaction from B to C, from the previously generated UTXO at Address B
+* Using the tx_id of the transaction, retrieve the hex of the transaction (transaction condensed into hexadecimal format)
+* Decode this hex using ```deciderawtransaction``` which turns the hex into a readable JSON Script, from which we extract the ScriptSig
+
