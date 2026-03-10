@@ -68,6 +68,7 @@ Once this is done, we can start with the making of the required transaction
 1. Locking Script Creation (ScriptPubKey)
    
 When A sends BTC to B, the output contains a ScriptPubKey.
+
 Structure:
 
 ```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
@@ -76,6 +77,7 @@ Structure:
 This acts as the challenge script defining the conditions to spend the output.
 
 2. Unlocking Script Creation (ScriptSig)
+   
 When B spends the output (B → C), the input contains a ScriptSig.
 
 Structure:
@@ -127,25 +129,32 @@ The entire execution takes place using a stack-based execution process :
 When A sends BTC to B using a SegWit address, the output contains a P2SH ScriptPubKey.
 
 Structure:
+
 ```OP_HASH160 <RedeemScriptHash> OP_EQUAL```
 ```<RedeemScriptHash>```-> is the HASH160 of the redeem script.
+
 The redeem script corresponds to the SegWit witness program.
 
 2. Redeem Script(Witness Program)
 
 The redeem script embedded inside P2SH is:
+
 ```0 <PubKeyHash>```
 
 0-> SegWit version number.
+
 ```<PubKeyHash>```-> HASH160 of B's public key.
+
 This script tells Bitcoin that the actual unlocking data will be stored in the witness field.
 
 3. Unlocking Script (ScriptSig)
 
 For P2SH-P2WPKH, the ScriptSig contains only the redeem script:
+
 ```<redeem_script>```
 
 Example:
+
 ```0 <PubKeyHash>```
 
 So ScriptSig is much smaller than legacy ScriptSig.
@@ -155,8 +164,10 @@ So ScriptSig is much smaller than legacy ScriptSig.
 The actual unlocking data is placed in the witness field instead of ScriptSig.
 
 Witness structure:
+
 ```<signature>```
 ```<public_key>```
+
 This is similar to the legacy ScriptSig, but moved into the witness.
 
 5. Transaction Linking
@@ -164,6 +175,7 @@ This is similar to the legacy ScriptSig, but moved into the witness.
 The B->C transaction input references the previous output using:
 
 ```txid``` → transaction ID of A → B
+
 ```vout``` → output index
 
 This output becomes the input for the next transaction.
@@ -190,7 +202,7 @@ The Entire Execution takes place using a stack-based execution process :
 
  ### Comparison of P2PKH (Legacy) and P2SH-P2WPKH (SegWit) Transactions
  
-####1. Size comparison of P2PKH and P2SH-P2WPKH transactions
+##### 1. Size comparison of P2PKH and P2SH-P2WPKH transactions
 
 The transaction size was obtained using:
 ```bitcoin-cli -regtest getrawtransaction <txid> true```
@@ -206,7 +218,7 @@ The important fields observed were size, vsize and weight.
 
 The SegWit transaction has smaller virtual size and weight compared to the Legacy transaction.
 
-####2. Script structure comparison (challenge-response script)
+#### 2. Script structure comparison (challenge-response script)
    
 Feature	                      P2PKH (Legacy)	                                      P2SH-P2WPKH (SegWit)
 
@@ -220,7 +232,7 @@ Script result	                     TRUE	                                        
 * In P2PKH, the signature and public key are stored in scriptSig.
 * In P2SH-P2WPKH, the signature and public key are stored in the witness, and scriptSig only contains the redeemScript.
 
-####3. Why SegWit transactions are smaller?
+#### 3. Why SegWit transactions are smaller?
 
 * SegWit transactions are smaller because the signature data is separated from the main transaction and stored in the witness field.
 * In Legacy transactions, the signature and public key are stored in scriptSig, and the entire scriptSig is counted fully in the transaction size.
@@ -237,7 +249,7 @@ vsize = weight / 4
 
 Because the witness part is multiplied by 1 instead of 4, the total weight and virtual size of the SegWit transaction becomes smaller.
 
-####4. Benefits of SegWit transactions
+#### 4. Benefits of SegWit transactions
 
 * Lower transaction fees due to smaller virtual size
 * More transactions can fit in one block
