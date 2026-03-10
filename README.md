@@ -2,7 +2,7 @@
 
 ## Team Information
 
-###Team Name: Chain Snatchers
+### Team Name: Chain Snatchers
 
 * **Team Member 1:** Managari Saatvik - 240002035
 * **Team Member 2:** Nagalla AbhiSri Karthik - 240002041
