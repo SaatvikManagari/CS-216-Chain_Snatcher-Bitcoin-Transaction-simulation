@@ -74,7 +74,7 @@ Once this is done, we can start with the making of the required transaction
          OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
          <PubKeyHash>-> is the hash of B’s public key.
 
-       This acts as the challenge script, defining the conditions to spend the output.
+       This serves as the challenge script, defining the conditions for spending the output.
 
 2. Unlocking Script Creation (ScriptSig)
    
@@ -103,6 +103,10 @@ The entire execution takes place using a stack-based execution process :
 * Push PubKeyHash -> [Sig, PubKey, HASH160(PubKey), PubKeyHash]
 * OP_EQUALVERIFY -> [Sig, PubKey]
 * OP_CHECKSIG -> [TRUE]
+* 
+
+### Images:
+
 
 
 ## Part 2: SegWit Transaction
