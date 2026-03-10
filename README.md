@@ -60,3 +60,13 @@ Once this is done, we can start with the making of the required transaction
 * Using the tx_id of the transaction, retrieve the hex of the transaction (transaction condensed into hexadecimal format)
 * Decode this hex using ```deciderawtransaction``` which turns the hex into a readable JSON Script, from which we extract the ScriptSig
 
+### Script Analysis
+
+* Using the btcdeb, we verify the transaction's validity
+* We using ```./btcdeb <ScriptSig> <ScriptPubKey>```
+
+
+** ScriptSig : ```Signature[ALL] Pubkey```
+** ScriptPubKey : ```OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG```
+
+
